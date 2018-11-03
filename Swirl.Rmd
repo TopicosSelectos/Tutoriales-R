@@ -1,0 +1,34 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+
+```{r}
+install.packages("swirl")
+```
+
+
+```{r}
+library("swirl")
+swirl()
+```
+
+
+```{r}
+plot(child ~ parent, galton)
+```
+
+```{r}
+plot(jitter(child,4) ~ parent,galton)
+```
+
+```{r}
+regrline <- lm(child ~ parent, galton)
+```
+
+```{r}
+plot(child ~ parent, galton)
+regrline <- lm(child ~ parent, galton)
+abline(regrline, lwd=3, col = 'red')

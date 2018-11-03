@@ -1,0 +1,380 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Q1. Using R as a calculator
+Exercise 1: Calculate square root of 729
+
+```{r}
+sqrt (729)
+```
+
+
+
+
+Q2. Creating a numeric variable
+Exercise 2: Create a new variable 'b' with value 1947.0
+
+```{r}
+b <- 1947.0
+```
+
+
+
+
+Q3. How to convert a numeric variable to character
+Exercise 3: Convert 'b' from previous exercise to character
+
+```{r}
+b <- as.character(b)
+
+print (b)
+```
+
+
+
+
+Q5. Create an environment within the global environment
+
+Exercise 5.1: Create a new environment called 'myEnv'
+```{r}
+myEnv <- new.env()
+```
+
+Exercise 5.2: Create a variable inside it
+```{r}
+assign('b', 3, envir = myEnv)
+```
+
+Exercise 5.3: Access the variable inside the new environment
+```{r}
+get('b', envir=myEnv)
+```
+
+Exercise 5.4: Delete the variable inside that environment
+```{r}
+rm(b, envir=myEnv)
+```
+
+
+
+
+Q6. Create a numeric vector
+
+Exercise 6.a: Create a vector numbers from 1 to 6 and find out its class
+```{r}
+one_to_six <- c(1, 2, 3, 4, 5, 6)
+
+class(one_to_six)
+```
+
+Exercise 6.b: Create a vector containing following mixed elements {1, 'a', 2, 'b'} and find out its class
+```{r}
+one_a <- c(1, "a", 2, "b")
+
+class(one_a) # character
+```
+
+
+
+
+Q7. Initialise Character vector
+
+
+Exercise 7.a: Initialise a character vector of length 26
+```{r}
+charHundred <- character(26)
+
+charHundred
+```
+
+Exercise 7.b: Assign the character 'a' to the first element in above vector.
+```{r}
+charHundred[1] <- "a"
+```
+
+
+
+
+Q8. Vector operations
+
+
+Exercise 8.1: Create a vector with some of your friend's names
+```{r}
+MisAmigos <- c("Kike", "Agustin", "Sergio", "Roger", "Pillo")
+```
+
+
+Exercise 8.2: Get the length of above vector
+```{r}
+length(MisAmigos)
+```
+
+
+Exercise 8.3: Get the first two friends from above vector
+```{r}
+MisAmigos[1:2]
+```
+
+
+Exercise 8.4: Get the 2nd and 3rd friends
+```{r}
+MisAmigos[c(2,3)]
+```
+
+
+Exercise 8.5: Sort your friends by names using 2 methods
+```{r}
+sort(MisAmigos)
+
+MisAmigos[order(MisAmigos)]
+```
+
+
+Exercise 8.6: Reverse direction of the above sort
+```{r}
+sort(MisAmigos, decreasing=TRUE)
+
+MisAmigos[rev(order(MisAmigos))]
+```
+
+
+
+
+
+Q9. Create customised vector sequences
+
+Exercise 9: Create with rep and seq: 'a','a',1,2,3,4,5,7,9,11
+```{r}
+# because of the presence of 'a' character, the numbers are converted to characters as well.
+out <- c(rep('a', 2), seq(1, 5), seq(7, 11, by=2)) 
+```
+
+
+
+
+
+Q10. Remove missing values
+
+Exercise 10: Remove missing value from c(1, 2, NA, 4)
+```{r}
+MiVector <- c(1, 2, NA, 4)
+MiVector[!is.na(MiVector)]
+```
+
+
+
+
+
+Q11. Random sampling
+
+
+Exercise 11: Pick 50 random numbers between 1 to 100, with replacement
+```{r}
+NumRandom <-sample(1:100, 50, replace=T)
+NumRandom
+```
+
+
+
+
+Q12. Checking the class
+
+Exercise 12: Check the class of mySample
+```{r}
+class (NumRandom) 
+```
+
+
+
+
+
+Q13. Find the class of ‘iris’ dataframe, find the class of all the columns of ‘iris’, get the summary of ‘iris’, get the top 6 rows, view it in a spreadsheet format, get row names, get column names, get number of rows and get number of columns.
+
+
+Exercise 13: Apply the above functions and inspect results on 'iris' (a base R dataframe)
+```{r}
+class (iris)  # get class
+```
+
+```{r}
+sapply (iris, class)  # get class of all columns
+```
+
+```{r}
+str (iris)  # structure
+```
+
+```{r}
+summary (iris)  # summary of airquality
+```
+
+```{r}
+head (iris)  # view the first 6 obs
+```
+
+```{r}
+fix (iris)  # view spreadsheet like grid
+```
+
+```{r}
+rownames (iris)  # row names
+```
+
+```{r}
+colnames (iris)  # columns names
+```
+
+```{r}
+nrow (iris)  # number of rows
+```
+
+```{r}
+ncol (iris)  # number of columns
+```
+
+
+
+
+
+Q14. Subsetting a dataframe
+
+Exercise 14.1: Get the last 2 rows in last 2 columns from iris dataset
+```{r}
+numRows <- nrow(iris)
+
+numCols <- ncol(iris)
+
+iris[(numRows-1):numRows, (numCols-1):numCols]
+```
+
+Exercise 14.2: Get rows with Sepal.Width > 3.5 using which() from iris
+```{r}
+iris[iris$Sepal.Width > 3, ]
+
+iris[which(iris$Sepal.Width > 3), ]
+```
+
+Exercise 14.3: Get the rows with 'versicolor' species using subset() from iris
+```{r}
+subset(iris, Species == "versicolor")
+```
+
+
+
+
+
+
+Q15. With the dataframes created from code below, perform the various merge operations.
+```{r}
+set.seed(100)
+
+Df1 <- iris[sample(1:nrow(iris), 10), c(1,2,3,5)]
+
+Df2 <- iris[sample(1:nrow(iris), 10), c(1,2,4,5) ]
+
+# induce NAs
+
+Df1 <- Df1[sample(1:nrow(Df1), 3), 4]
+
+Df2 <- Df2[sample(1:nrow(Df1), 3), 4]
+```
+
+
+
+
+
+
+Q16. Create customised character vector using the paste function
+
+Exercise 16: Create this character vector using paste: 'var1', 'var2', 'var3', 'pred1', 'pred2', 'pred3'
+```{r}
+paste0 (c(rep("var", 3), rep("pred", 3)), 1:3)
+```
+
+
+
+
+
+
+Q17. Creating tables
+
+Exercise 17: Tabulate the Sepal.Width for each Species from iris
+```{r}
+table(iris$Species, iris$Sepal.Width)
+```
+
+
+
+
+
+
+Q18. Create a logic for the above problem using a For-loop
+
+Exercise 18: Make the logic for above problem statement using a 'for-loop' and a 'if-else' statement
+```{r}
+output <- character(nrow(iris))
+
+for(i in c(1:nrow(iris))){
+
+if (iris$Sepal.Length[i] > 5){
+
+output[i] <- "greater than 5"
+
+} else {
+
+output[i] <- "lesser than 5"
+
+}
+
+}
+```
+
+
+
+
+
+
+
+Q19. ifelse() function
+
+Exercise 19: Make the logic for above problem statement using a ifelse() function
+```{r}
+output <- ifelse(iris$Sepal.Length > 5, "greater than 5", "lesser than 5") # works like the 'if' function in MS Excel, except that the condition is checked for every element of iris$Sepal.Length
+
+output
+```
+
+
+
+
+
+
+
+Q20. The apply() function
+
+
+Exercise 20: Create a logic for the same problem statement using apply() function
+```{r}
+# define the function for apply() statement
+
+myFunc <- function(x){
+
+if(x['Sepal.Length'] > 5){
+
+"greater than 5"
+
+} else {
+
+"lesser than 5"
+
+}
+
+}
+
+output <- apply(iris, 1, FUN=myFunc)
+
+output
+```
+
