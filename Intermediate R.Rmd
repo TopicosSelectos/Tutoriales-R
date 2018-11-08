@@ -1,0 +1,1446 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+---------------------------------------------------------------------------
+2.1 Equality
+
+```{r}
+TRUE == TRUE 
+```
+
+```{r}
+15 == (7+8)
+```
+
+```{r}
+257 == (25*13)
+```
+
+
+
+
+
+---------------------------------------------------------------------------
+2.1.1 Greater and less than
+
+
+
+```{r}
+12 * 45 + 10 > 5 + 4
+```
+
+```{r}
+"ingenieria de software" < "software engineering"
+```
+
+
+
+2.1.2 Compare vectors
+
+```{r}
+# The linkedin and facebook vectors have already been created for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+facebook <- c(17, 7, 5, 16, 8, 13, 14)
+
+# Popular days
+linkedin > 15
+```
+
+```{r}
+Tienda1 <- c(150, 240 , 320, 180, 290)
+Tienda2 <- c(135, 340, 280, 325, 170)
+
+Tienda1 > 250
+
+Tienda2 < 200
+
+Tienda1 > Tienda2
+```
+
+
+
+2.1.3 Compare matrices
+
+```{r}
+# The social data has been created for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+facebook <- c(17, 7, 5, 16, 8, 13, 14)
+
+views <- matrix(c(linkedin, facebook), nrow = 2, byrow = TRUE)
+views
+```
+
+```{r}
+Ganancias <- matrix(c(Tienda1, Tienda2), nrow = 2, byrow = TRUE)
+Ganancias
+```
+
+```{r}
+Ganancias > 200
+```
+
+```{r}
+Ganancias == 150
+```
+
+
+
+2.2 Logical Operators
+
+2.2.1 & and |
+
+```{r}
+TRUE & TRUE
+FALSE | TRUE
+5 <= 5 & 2 < 3
+3 < 4 | 7 < 6
+```
+
+```{r}
+?tail
+```
+
+```{r}
+# The linkedin and last variable are already defined for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+last <- tail(linkedin, 1)
+
+# Is last under 5 or above 10?
+5 > last | last > 10
+```
+
+```{r}
+UltimaGan <- tail(Tienda1, 1)
+
+250 < UltimaGan | 289 < UltimaGan
+```
+
+```{r}
+# Is last between 15 (exclusive) and 20 (inclusive)?
+15 < last & last <= 20 
+```
+
+```{r}
+289 < UltimaGan & UltimaGan <= 290
+```
+
+
+2.2.2 & and | (2)
+
+```{r}
+# linkedin exceeds 10 but facebook below 10
+linkedin > 10 & facebook < 10
+```
+
+```{r}
+Tienda2 > 330 & Tienda1 < 290
+```
+
+
+```{r}
+# When were one or both visited at least 12 times?
+linkedin >= 12 | facebook >= 12
+```
+
+```{r}
+Tienda1 > 250 | Tienda2 > 250
+```
+
+
+```{r}
+# When is views between 11 (exclusive) and 14 (inclusive)?
+views > 11 & views <= 14
+```
+
+```{r}
+Ganancias > 200 & Ganancias < 300
+```
+
+
+
+2.2.3 Blend it all together
+
+```{r}
+# Reading data
+#li_df <- read.table(stdin(), header=TRUE) 
+#li_df
+
+#Writing data
+# Write CSV in R
+#write.csv(li_df, file = "data/li_df.csv")
+
+## # li_df is pre-loaded in your workspace
+#Loading data
+li_df <- read.csv("data/li_df.csv")
+#View(li_df)
+
+# Select the second column, named day2, from li_df: second
+second <- li_df$day2
+second
+```
+
+
+
+2.3 Conditional Statements
+
+2.3.1 The if statement
+
+```{r}
+# Variables related to your last day of recordings
+medium <- "LinkedIn"
+num_views <- 14
+
+# Examine the if statement for medium
+if (medium == "LinkedIn") {
+  print("Showing LinkedIn information")
+}
+```
+
+```{r}
+Info1 <- "Abarrotes"
+Ganan1 <- 250
+
+if (Info1 == "Abarrotes") {
+  print("Abarrotes doña Marta")
+}
+```
+
+```{r}
+# Write the if statement for num_views
+if (num_views > 15) {
+  print("You're popular!")
+}
+```
+
+```{r}
+if (Ganan1 > 200) {
+  print("Las ganancias del dia fueron buenas")
+}
+```
+
+
+
+2.3.2 Add an else
+
+```{r}
+# Variables related to your last day of recordings
+medium <- "LinkedIn"
+num_views <- 14
+
+# Control structure for medium
+if (medium == "LinkedIn") {
+  print("Showing LinkedIn information")
+} else {
+  print("Unknown medium")
+}
+```
+
+```{r}
+Info1 <- "Abarrotes"
+Ganan1 <- 190
+
+if (Info1 == "Abarrotes") {
+  print("Abarrotes doña Marta")
+} else {
+  print("No son los abarrotes doña Marta")
+}
+```
+
+
+```{r}
+# Control structure for num_views
+if (num_views > 15) {
+  print("You're popular!")
+} else {
+  print("Try to be more visible!")
+}
+```
+
+```{r}
+if (Ganan1 > 200) {
+  print("Las ganancias del dia fueron buenas")
+} else {
+  print("No hubo buenas ganancias en el dia")
+}
+```
+
+
+
+2.3.3 Customize further: else if
+
+```{r}
+# Variables related to your last day of recordings
+medium <- "LinkedIn"
+num_views <- 14
+
+# Control structure for medium
+if (medium == "LinkedIn") {
+  print("Showing LinkedIn information")
+} else if (medium == "Facebook") {
+  # Add code to print correct string when condition is TRUE
+  print("Showing Facebook information")
+} else {
+  print("Unknown medium")
+}
+```
+
+```{r}
+Info1 <- "Tiendita"
+Ganan1 <- 290
+
+if (Info1 == "Abarrotes") {
+  print("Abarrotes doña Marta")
+} else if (Info1 == "Tiendita"){
+  print("Tiendita de la esquina")
+} else {
+  print("Tienda desconocida")
+}
+```
+
+
+```{r}
+# Control structure for num_views
+if (num_views > 15) {
+  print("You're popular!")
+} else if (num_views <= 15 & num_views > 10) {
+  # Add code to print correct string when condition is TRUE
+  print("Your number of views is average")
+} else {
+  print("Try to be more visible!")
+}
+```
+
+```{r}
+if (Ganan1 > 300) {
+  print("Fue un dia de excelentes ganancias")
+} else if (Ganan1 > 200 & Ganan1 <= 300) {
+  print("Las ganancias fueron buenas")
+} else {
+  print("No hubo buenas ganancias el dia de hoy")
+}
+```
+
+
+
+2.3.4 Else if 2.0
+
+```{r}
+number <- 5
+
+if (number < 10) {
+  if (number < 5) {
+    result <- "extra small"
+  } else {
+    result <- "small"
+  }
+} else if (number < 100) {
+  result <- "medium"
+} else {
+  result <- "large"
+}
+print(result)
+```
+
+```{r}
+Numeros <- 150000
+
+if (Numeros >= 1000 & Numeros < 999999) {
+  if (Numeros >= 100 & Numeros < 999) {
+    result <- "Cienes"
+  } else {
+    result <- "Miles"
+  }
+} else if (Numeros >= 1000000){
+  result <- "Millones"
+} else {
+  result <- "Mayor a los millones"
+}
+
+result
+```
+
+
+
+
+
+
+
+
+3 Loops
+
+3.0.1 Write a while loop
+
+```{r}
+speed <- 64
+
+# Code the while loop
+while (speed > 30) {
+  print("Slow down!")
+  speed <- speed - 7
+}
+```
+
+```{r}
+Temperatura <- 90
+
+while (Temperatura > 70) {
+  print("Temperatura muy alta")
+  Temperatura <- Temperatura - 6
+}
+```
+
+
+
+
+3.0.2 Throw in more conditionals
+
+```{r}
+# Initialize the speed variable
+speed <- 64
+
+# Extend/adapt the while loop
+while (speed > 30) {
+  print(paste("Your speed is", speed))
+  if (speed > 48) {
+    print("Slow down big time!")
+    speed <- speed - 11
+  } else {
+    print("Slow down!")
+    speed <- speed - 6
+  }
+}
+```
+
+```{r}
+
+Temperatura <- 90
+
+
+while (Temperatura > 40) {
+  print(paste("La temperatura es de", Temperatura))
+  if (Temperatura > 70) {
+    print("Temperatura muy alta")
+    Temperatura <- Temperatura - 11
+  } else {
+    print("Bajando temperatura")
+    Temperatura <- Temperatura - 6
+  }
+}
+```
+
+
+
+
+3.0.3 Stop the while loop: break
+
+```{r}
+# Initialize the speed variable
+speed <- 120
+
+while (speed > 30) {
+  print(paste("Your speed is", speed))
+  
+  # Break the while loop when speed exceeds 80
+  if (speed > 80) {
+    break
+  }
+  
+  if (speed > 48) {
+    print("Slow down big time!")
+    speed <- speed - 11
+  } else {
+    print("Slow down!")
+    speed <- speed - 6
+  }
+}
+```
+
+```{r}
+# Initialize the speed variable
+Temperatura <- 120
+
+while (Temperatura > 30) {
+  print(paste("La temperatura es", Temperatura))
+  
+  if (Temperatura > 100) {
+    print("No es posible disminuir la temperatura")
+    break
+  }
+  
+  if (Temperatura > 70) {
+    print("La temperatura es muy alta")
+    Temperatura <- Temperatura - 11
+  } else {
+    print("Bajando temperatura")
+    Temperatura <- Temperatura - 6
+  }
+}
+```
+
+
+
+
+3.0.4 Build a while loop from scratch
+
+```{r}
+# Initialize i as 1 
+i <- 1
+
+# Code the while loop
+while (i <= 10) {
+  print(3 * i)
+  if ( (3 * i) %% 8 == 0) {
+    break
+  }
+  i <- i + 1
+}
+```
+
+```{r}
+Tablas <- 1
+
+while (Tablas <= 10) {
+  print(5 * Tablas)
+  if ((5 * Tablas) %% 50 == 0) {
+    break
+  }
+  Tablas <- Tablas + 1
+}
+```
+
+
+
+3.0.5 Loop over a vector
+
+```{r}
+primes <- c(2, 3, 5, 7, 11, 13)
+
+# loop version 1
+for (p in primes) {
+  print(p)
+}
+
+# loop version 2
+for (i in 1:length(primes)) {
+  print(primes[i])
+}
+```
+
+```{r}
+# The linkedin vector has already been defined for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+
+# Loop version 1
+for (li in linkedin) {
+  print(li)
+}
+```
+
+
+
+
+3.0.6 Loop over a list
+
+```{r}
+
+primes_list <- list(2, 3, 5, 7, 11, 13)
+
+# loop version 1
+for (p in primes_list) {
+  print(p)
+}
+
+# loop version 2
+for (i in 1:length(primes_list)) {
+  print(primes_list[[i]])
+}
+```
+
+```{r}
+# The nyc list is already specified
+nyc <- list(pop = 8405837, 
+            boroughs = c("Manhattan", "Bronx", "Brooklyn", "Queens", "Staten Island"), 
+            capital = FALSE)
+
+# Loop version 1
+for (info in nyc) {
+  print(info)
+}
+```
+
+
+
+
+3.0.7 Loop over a matrix
+
+```{r}
+# The tic-tac-toe matrix ttt has already been defined for you
+d1 <- c("O",  "NA",   "X")
+d2 <- c("NA", "O",  "O" )
+d3 <- c("X",  "NA",  "X")
+
+ttt_data <- c(d1, d2, d3)
+ttt_data
+```
+
+```{r}
+ttt <- matrix(ttt_data, byrow = TRUE, nrow = 3)
+ttt
+```
+
+```{r}
+# define the double for loop
+for (i in 1:nrow(ttt)) {
+  for (j in 1:ncol(ttt)) {
+    print(paste("On row", i, "and column", j, "the board contains", ttt[i,j]))
+  }
+}
+```
+
+
+
+
+3.0.8 Mix it up with control flow
+
+```{r}
+# The linkedin vector has already been defined for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+
+# Code the for loop with conditionals
+for (li in linkedin) {
+  if (li > 10) {
+    print("You're popular!")
+  } else {
+    print("Be more visible!")
+  }
+  print(li)
+}
+```
+
+```{r}
+Tienda <- c(150, 200, 230, 180, 300)
+
+for (Ga in Tienda) {
+  if (Ga >= 200){
+    print("Buenas ganancias en el día")
+  } else {
+    print("No hubo buenas ganancias")
+  }
+  print(Ga)
+}
+```
+
+
+
+
+3.0.9 Next, you break it
+
+```{r}
+# The linkedin vector has already been defined for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+
+# Adapt/extend the for loop
+for (li in linkedin) {
+  if (li > 10) {
+    print("You're popular!")
+  } else {
+    print("Be more visible!")
+  }
+  
+  # Add if statement with break
+  if (li > 16) {
+    print("This is ridiculous, I'm outta here!")
+    break
+  }
+  
+  # Add if statement with next
+  if (li < 5) {
+    print("This is too embarrassing!")
+    next
+  }
+  
+  print(li)
+}
+```
+
+
+
+
+3.0.10 Build a for loop from scratch
+
+```{r}
+# Pre-defined variables
+rquote <- "r's internals are irrefutably intriguing"
+rquote
+
+chars <- strsplit(rquote, split = "")[[1]]
+chars
+
+# Initialize rcount
+rcount <- 0
+
+# Finish the for loop
+for (char in chars) {
+  if (char == "r") {
+    rcount <- rcount + 1
+  }
+  if (char == "u") {
+    break
+  }
+}
+
+# Print out rcount
+rcount
+
+```
+
+```{r}
+Nom <- "Gonzalo Chavira Campos"
+
+Let <- strsplit(Nom, split = "")[[1]]
+
+Cont <- 0
+
+for (Letr in Let) {
+  if (Letr == "a"){
+    Cont <- Cont + 1
+  }
+  if (Letr == "s") {
+    break
+  }
+}
+
+Cont
+```
+
+
+
+
+
+
+
+
+4 Functions
+
+4.0.1 Function documentation
+
+```{r}
+# Consult the documentation on the mean() function
+?mean
+help(mean)
+
+# Inspect the arguments of the mean() function
+args(mean)
+```
+
+
+
+4.0.2 Use a function
+
+```{r}
+# The linkedin and facebook vectors have already been created for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+facebook <- c(17, 7, 5, 16, 8, 13, 14)
+
+# Calculate average number of views
+avg_li <- mean(linkedin)
+avg_fb <- mean(facebook)
+
+# Inspect avg_li and avg_fb
+avg_li
+```
+
+```{r}
+PromT1 <- mean(Tienda)
+
+PromT1
+```
+
+
+
+4.0.3 Use a function (2)
+
+```{r}
+# The linkedin and facebook vectors have already been created for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+facebook <- c(17, 7, 5, 16, 8, 13, 14)
+
+# Calculate the mean of the sum
+avg_sum <- mean(linkedin + facebook)
+
+# Calculate the trimmed mean of the sum
+avg_sum_trimmed <- mean(linkedin + facebook, trim = 0.2)
+
+# Inspect both new variables
+avg_sum
+```
+
+
+
+4.0.4 Use a function (3)
+
+```{r}
+linkedin <- c(16, 9, 13, 5, NA, 17, 14)
+facebook <- c(17, NA, 5, 16, 8, 13, 14)
+
+# Basic average of linkedin
+mean(linkedin)
+
+# Advanced average of linkedin
+mean(linkedin, na.rm = TRUE)
+```
+
+
+
+4.0.5 Functions inside functions
+
+```{r}
+# The linkedin and facebook vectors have already been created for you
+linkedin <- c(16, 9, 13, 5, NA, 17, 14)
+facebook <- c(17, NA, 5, 16, 8, 13, 14)
+
+# Calculate the mean absolute deviation
+mean(abs(linkedin - facebook), na.rm = TRUE)
+```
+
+
+
+4.0.6 Write your own function
+
+```{r}
+# Create a function pow_two()
+pow_two <- function(x) {
+  x ^ 2
+}
+
+# Use the function
+pow_two(12)
+```
+
+```{r}
+Cuadrado <- function(x) {
+  x ^ 4
+}
+
+Cuadrado(5)
+```
+
+
+
+4.0.7 Write your own function (2)
+
+```{r}
+# Define the function hello()
+hello <- function() {
+  print("Hi there!")
+  TRUE
+}
+
+# Call the function hello()
+hello()
+```
+
+```{r}
+Saludo <- function() {
+  print("Buenas noches")
+  TRUE
+}
+
+Saludo()
+```
+
+
+
+4.0.9 R you functional?
+
+```{r}
+# The linkedin and facebook vectors have already been created for you
+linkedin <- c(16, 9, 13,  5, 2, 17, 14)
+facebook <- c(17, 7, 5, 16,  8, 13, 14)
+
+# Define the interpret function
+interpret <- function(num_views) {
+  if (num_views > 15) {
+    print("You're popular!")
+    return(num_views)
+  } else {
+    print("Try to be more visible!")
+    return(0)
+  }
+}
+
+# Call the interpret function twice
+interpret(linkedin[1])
+```
+
+```{r}
+interpret <- function(Ganancias) {
+  if (Ganancias -> 200){
+    print("Buenas ganancias")
+    return(Ganancias)
+  } else {
+    print("Malas ganancias")
+    return(0)
+  }
+}
+
+interpret(Tienda[3])
+```
+
+
+
+4.0.10 R you functional? (2)
+
+```{r}
+# The linkedin and facebook vectors have already been created for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+facebook <- c(17, 7, 5, 16, 8, 13, 14)
+
+# The interpret() can be used inside interpret_all()
+interpret <- function(num_views) {
+  if (num_views > 15) {
+    print("You're popular!")
+    return(num_views)
+  } else {
+    print("Try to be more visible!")
+    return(0)
+  }
+}
+
+# Define the interpret_all() function
+# views: vector with data to interpret
+# return_sum: return total number of views on popular days?
+interpret_all <- function(views, return_sum = TRUE) {
+  count <- 0
+
+  for (v in views) {
+    count <- count + interpret(v)
+  }
+
+  if (return_sum) {
+    return(count)
+  } else {
+    return(NULL)
+  }
+}
+
+# Call the interpret_all() function on both linkedin and facebook
+interpret_all(linkedin)
+```
+
+
+
+4.0.11 Load an R Package
+
+```{r}
+# Load the ggplot2 package
+library("ggplot2")
+
+# Retry the qplot() function
+qplot(mtcars$wt, mtcars$hp)
+```
+
+```{r}
+# Check out the currently attached packages again
+search()
+```
+
+
+
+
+
+
+5 The apply family
+
+5.0.1 Use lapply with a built-in R functio
+
+```{r}
+# The vector pioneers has already been created for you
+pioneers <- c("GAUSS:1777", "BAYES:1702", "PASCAL:1623", "PEARSON:1857")
+
+# Split names from birth year
+split_math <- strsplit(pioneers, split = ":")
+split_math
+```
+
+```{r}
+# Convert to lowercase strings: split_low
+split_low <- lapply(split_math, tolower)
+split_low
+```
+
+```{r}
+# Take a look at the structure of split_low
+str(split_low)
+```
+
+
+
+
+5.0.2 Use lapply with your own function
+
+```{r}
+# Write function select_first()
+select_first <- function(x) {
+  x[1]
+}
+
+# Apply select_first() over split_low: names
+names <- lapply(split_low, select_first)
+names
+```
+```{r}
+# Write function select_second()
+select_second <- function(x) {
+  x[2]
+}
+
+# Apply select_second() over split_low: years
+years <- lapply(split_low, select_second)
+years
+```
+
+
+
+
+5.0.3 lapply and anonymous functions
+
+```{r}
+# Named function
+triple <- function(x) { 3 * x }
+
+# Anonymous function with same implementation
+function(x) { 3 * x }
+
+# Use anonymous function inside lapply()
+lapply(list(1,2,3), function(x) { 3 * x })
+```
+
+
+
+
+5.0.4 Use lapply with additional arguments
+
+```{r}
+# Definition of split_low
+pioneers <- c("GAUSS:1777", "BAYES:1702", "PASCAL:1623", "PEARSON:1857")
+split <- strsplit(pioneers, split = ":")
+split_low <- lapply(split, tolower)
+
+# Generic select function
+select_el <- function(x, index) {
+  x[index]
+}
+
+# Use lapply() twice on split_low: names and years
+names <- lapply(split_low, select_el, index = 1)
+names
+
+years <- lapply(split_low, select_el, index = 2)
+years
+```
+
+
+
+5.0.5 How to use sapply
+
+```{r}
+# temp has already been defined in the workspace
+# The tic-tac-toe matrix ttt has already been defined for you
+t1 <- c( 3,  7,  9,  6, -1)
+t2 <- c( 6,  9, 12, 13,  5)
+t3 <- c(4,  8,  3, -1, -3)
+t4 <- c(1,  4,  7,  2, -2)
+t5 <- c(5, 7, 9, 4, 2)
+t6 <- c(-3,  5,  8,  9,  4)
+t7 <- c(3, 6, 9, 4, 1)
+
+
+temp <- list(t1, t2, t3, t4, t5, t6, t7)
+temp
+```
+
+```{r}
+# Use lapply() to find each day's minimum temperature
+lapply(temp, min)
+```
+
+```{r}
+# Use sapply() to find each day's minimum temperature
+sapply(temp, min)
+```
+
+
+
+
+
+
+5.0.6 sapply with your own function
+
+```{r}
+# temp is already defined in the workspace
+
+# Finish function definition of extremes_avg
+extremes_avg <- function(x) {
+  ( min(x) + max(x) ) / 2
+}
+
+# Apply extremes_avg() over temp using sapply()
+sapply(temp, extremes_avg)
+
+# Apply extremes_avg() over temp using lapply()
+lapply(temp, extremes_avg)
+```
+
+
+
+
+5.0.7 sapply with function returning vector
+
+```{r}
+# temp is already available in the workspace
+
+# Create a function that returns min and max of a vector: extremes
+extremes <- function(x) {
+  c(min = min(x), max = max(x))
+}
+
+# Apply extremes() over temp with sapply()
+sapply(temp, extremes)
+
+lapply(temp, extremes)
+```
+
+
+
+5.0.8 sapply can’t simplify, now what?
+
+```{r}
+# temp is already prepared for you in the workspace
+
+# Definition of below_zero()
+below_zero <- function(x) {
+  return(x[x < 0])
+}
+
+# Apply below_zero over temp using sapply(): freezing_s
+freezing_s <- sapply(temp, below_zero)
+freezing_s
+
+# Apply below_zero over temp using lapply(): freezing_l
+freezing_l <- lapply(temp, below_zero)
+freezing_l
+
+# Are freezing_s and freezing_l identical?
+identical(freezing_s, freezing_l)
+```
+
+
+
+5.0.9 sapply with functions that return NULL
+
+```{r}
+# temp is already available in the workspace
+
+# Definition of print_info()
+print_info <- function(x) {
+  cat("The average temperature is", mean(x), "\n")
+}
+
+# Apply print_info() over temp using sapply()
+sapply(temp, print_info)
+
+# Apply print_info() over temp using lapply()
+lapply(temp, print_info)
+```
+
+
+
+5.0.10 Use vapply
+
+```{r}
+# temp is already available in the workspace
+
+# Definition of basics()
+basics <- function(x) {
+  c(min = min(x), mean = mean(x), max = max(x))
+}
+
+# Apply basics() over temp using vapply()
+vapply(temp, basics, numeric(3))
+```
+
+
+5.0.11 Use vapply (2
+
+```{r}
+# Definition of the basics() function
+# basics <- function(x) {
+#   c(min = min(x), mean = mean(x), median = median(x), max = max(x))
+# }
+
+# Fix the error:
+#vapply(temp, basics, numeric(3))
+
+
+
+# temp is already available in the workspace
+
+# Definition of the basics() function
+basics <- function(x) {
+  c(min = min(x), mean = mean(x), median = median(x), max = max(x))
+}
+
+# Fix the error:
+vapply(temp, basics, numeric(4))
+```
+
+
+
+5.0.12 From sapply to vapply
+
+```{r}
+# temp is already defined in the workspace
+
+# Convert to vapply() expression
+vapply(temp, max, numeric(1))
+
+# Convert to vapply() expression
+vapply(temp, function(x, y) { mean(x) > y }, logical(1), y = 5)
+```
+
+
+
+
+
+
+
+6 Utilities
+
+6.0.1 Mathematical utilities
+
+```{r}
+# The errors vector has already been defined for you
+errors <- c(1.9, -2.6, 4.0, -9.5, -3.4, 7.3)
+
+# Sum of absolute rounded values of errors
+sum(abs(round(errors)))
+```
+
+
+
+6.0.2 Find the error
+
+```{r}
+# Don't edit these two lines
+vec1 <- c(1.5, 2.5, 8.4, 3.7, 6.3)
+vec2 <- rev(vec1)
+
+# Fix the error
+#mean(abs(vec1), abs(vec2))
+
+# Fix the error
+mean(c(abs(vec1), abs(vec2)))
+```
+
+
+
+6.0.3 Data Utilities
+
+```{r}
+linkedin <- list(16, 9, 13, 5, 2, 17, 14)
+linkedin
+
+facebook <- list(17, 7, 5, 16, 8, 13, 14)
+facebook
+
+# Convert linkedin and facebook to a vector: li_vec and fb_vec
+li_vec <- unlist(linkedin)
+li_vec
+
+fb_vec <- unlist(facebook)
+fb_vec
+
+# Append fb_vec to li_vec: social_vec
+social_vec <- append(li_vec, fb_vec)
+social_vec
+
+# Sort social_vec
+sort(social_vec, decreasing = TRUE)
+```
+
+```{r}
+Tienda1 <- list(150, 250, 200, 180, 320)
+
+Tienda2 <- list(230, 315, 190, 200, 270)
+
+T1_vec <- unlist(Tienda1)
+T2_vec <- unlist(Tienda2)
+
+Tiendas_vec <- append(T1_vec, T2_vec)
+
+sort(Tiendas_vec, decreasing = FALSE)
+```
+
+
+
+6.0.4 Find the error (2)
+
+```{r}
+# Fix me
+#seq(rep(1, 7, by = 2), times = 7)
+
+# Fix me
+rep(seq(1, 7, by = 2), times = 7)
+```
+
+```{r}
+rep(seq(1, 100, by = 8), times = 2)
+```
+
+
+
+6.0.5 Beat Gauss using R
+
+```{r}
+# Create first sequence: seq1
+seq1 <- seq(1, 500, by = 3)
+seq1
+
+# Create second sequence: seq2
+seq2 <- seq(1200, 900, by = -7)
+seq2
+
+sum(seq1) + sum(seq2)
+```
+
+
+
+6.0.6 grepl & grep
+
+```{r}
+# The emails vector has already been defined for you
+emails <- c("john.doe@ivyleague.edu", "education@world.gov", "dalai.lama@peace.org",
+            "invalid.edu", "quant@bigdatacollege.edu", "cookie.monster@sesame.tv")
+
+# Use grepl() to match for "edu"
+grepl("edu", emails)
+
+
+# Use grep() to match for "edu", save result to hits
+hits <- grep("edu", emails)
+hits
+
+# Subset emails using hits
+emails[hits]
+```
+
+
+
+
+6.0.8 sub & gsub
+
+```{r}
+# The emails vector has already been defined for you
+emails <- c("john.doe@ivyleague.edu", "education@world.gov", "global@peace.org",
+            "invalid.edu", "quant@bigdatacollege.edu", "cookie.monster@sesame.tv")
+
+# Use sub() to convert the email domains to datacamp.edu
+sub("@.*\\.edu$", "@datacamp.edu", emails)
+```
+
+```{r}
+Correos <- c("al122334@alumnos.uacj.mx", "al134351@alumnos.uacj.mx", "al113425@alumnos.utcj.mx", "al164712@alumnos.uacj.mx", "al153764@alumnos.utcj.mx")
+
+sub("@.*\\.uacj.mx$", "@alumnos.uacjcu.mx", Correos)
+```
+
+
+
+
+6.0.10 Right here, right now
+
+```{r}
+# Get the current date: today
+today <- Sys.Date()
+today
+
+# See what today looks like under the hood
+unclass(today)
+
+
+# Get the current time: now
+now <- Sys.time()
+now
+
+# See what now looks like under the hood
+unclass(now)
+```
+
+
+
+6.0.11 Create and format dates
+
+```{r}
+as.Date("1982-01-13")
+as.Date("Jan-13-82", format = "%b-%d-%y")
+as.Date("13 January, 1982", format = "%d %B, %Y")
+
+
+today <- Sys.Date()
+format(Sys.Date(), format = "%d %B, %Y")
+format(Sys.Date(), format = "Today is a %A!")
+
+
+# Definition of character strings representing dates
+str1 <- "May 23, '96"
+str2 <- "2012-03-15"
+str3 <- "30/January/2006"
+
+# Convert the strings to dates: date1, date2, date3
+date1 <- as.Date(str1, format = "%b %d, '%y")
+date1
+
+date2 <- as.Date(str2)
+date2
+
+date3 <- as.Date(str3, format = "%d/%B/%Y")
+date3
+
+# Convert dates to formatted strings
+format(date1, "%A")
+
+format(date2, "%d")
+
+format(date3, "%b %Y")
+```
+
+
+
+
+6.0.12 Create and format times
+
+```{r}
+# Definition of character strings representing times
+str1 <- "May 23, '96 hours:23 minutes:01 seconds:45"
+str2 <- "2012-3-12 14:23:08"
+
+# Convert the strings to POSIXct objects: time1, time2
+time1 <- as.POSIXct(str1, format = "%B %d, '%y hours:%H minutes:%M seconds:%S")
+time1
+
+
+time2 <- as.POSIXct(str2)
+time2
+
+
+# Convert times to formatted strings
+format(time1, "%M")
+
+
+format(time2, "%I:%M %p")
+```
+
